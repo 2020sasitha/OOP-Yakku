@@ -1,0 +1,112 @@
+package versionF;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import versionE.InvalidITNumberException;
+
+public class AlarmClock {
+ private int Hour;
+ private int Minute;
+ private int Second;
+ 
+public AlarmClock() {
+	Hour = 12;
+	Minute = 0;
+	Second = 0;
+}
+
+public void InputAlarm() {
+	
+	try {
+
+	Scanner sc = new Scanner(System.in);
+	
+	System.out.print("Enter Hour    : ");
+	this.Hour = sc.nextInt();
+	
+	System.out.print("Enter Minute  : ");
+	this.Minute = sc.nextInt();
+	
+	System.out.print("Enter Seconds : ");
+	this.Second = sc.nextInt();
+	
+	sc.close();
+	
+	if((0 > this.Hour || this.Hour > 12) || (this.Minute < 0 || this.Minute > 59) || (this.Second < 0 || this.Second > 59)) {
+		throw new InvalidAlarmException();
+	} 
+	
+	} catch (InputMismatchException ex) {
+		System.out.println("InputMismatchException");
+	} catch (InvalidAlarmException e) {
+		System.out.println("InvalidAlarmException");
+	}
+}
+
+public void ShowAlarm() {
+	System.out.println(this.Hour + ":" + this.Minute + ":" + this.Second);
+}
+
+public void SetAlarm(int hour, int minute, int second) {
+
+	if(0 > hour || hour > 12) {
+		Hour = 0;
+	}else {
+		Hour = hour;
+	}
+	
+	if(minute < 0 || minute > 59)  {
+		Minute = 0;
+	}else {
+		Minute = minute;
+	}
+
+	if(second < 0 || second > 59)  {
+		second = 0;
+	}else {
+		Second = second;
+	}
+}
+
+}
+
+//-------------------------------------Invalid Exception --------------------------------
+
+package versionF;
+
+public class InvalidAlarmException extends Exception{
+
+	public InvalidAlarmException() {
+		System.out.println("Invalid alarm format");
+	}
+	
+}
+
+//-----------------------------------Main-------------------------------------------------
+
+
+package versionF;
+
+import java.util.ArrayList;
+
+public class MainApp {
+
+	public static void main(String[] args) throws InvalidAlarmException {
+		AlarmClock Ac1 = new AlarmClock();
+		AlarmClock Ac2 = new AlarmClock();
+		
+		Ac1.InputAlarm();
+		Ac2.SetAlarm(5,30,25);
+		
+		ArrayList<AlarmClock> a1 = new ArrayList();
+		a1.add(Ac1);
+		a1.add(Ac2);
+		
+		for(AlarmClock a : a1) {
+			a.ShowAlarm();
+		}
+	}
+
+}
+
