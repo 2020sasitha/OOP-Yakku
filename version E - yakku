@@ -1,0 +1,64 @@
+package versionE;
+
+public class student {
+	private String Studentid;
+	private String StudentName;
+	
+	public student(String studentid, String studentName) {
+		Studentid = studentid;
+		StudentName = studentName;
+	}
+	
+	public void display() {
+		
+		try {
+			
+			String part1 = Studentid.substring(0,2);
+			String part2 = Studentid.substring(2,10);
+			
+			if(Studentid.length()!=10) {
+				throw  new InvalidITNumberException();
+			}
+			else if((part1.equals("IT")) == false ) {
+				throw  new InvalidITNumberException();
+			}
+			else if((part2.matches("[0-9]{8}") == false)){
+				throw  new InvalidITNumberException();
+			}
+			else {
+				System.out.println("Student Id = " + this.Studentid);
+				System.out.println("Student Name = " + this.StudentName);
+			}
+		} 
+		
+		catch (InvalidITNumberException ex) {
+		}
+	}
+}
+
+//------------------------------------Exception--------------------------------
+
+
+package versionE;
+
+public class InvalidITNumberException extends Exception{
+	public InvalidITNumberException() {
+		System.out.println("Invalid IT number");
+	}
+}
+
+
+
+//-------------------------------------main--------------------------------------
+
+package versionE;
+
+public class Main {
+
+	public static void main(String[] args) throws InvalidITNumberException {
+		student s1 = new student("IT21251900", "Sanjana");
+		s1.display();
+
+	}
+
+}
