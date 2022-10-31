@@ -1,0 +1,146 @@
+//Alien
+
+package MenInBlack;
+
+public interface Alien {
+	public int getScore();
+}
+
+
+//AlienPack
+
+package MenInBlack;
+
+public class AlienPack {
+	Alien arr[];
+	
+	public AlienPack(int noOfAliens) {
+		arr = new Alien[noOfAliens];
+	}
+	
+	public void addAlien(Alien A, int index) {
+		arr[index] = A;
+	}
+	
+	public Alien[] getAliens() {
+		return arr;
+	}	
+	
+}
+
+//Main
+
+package MenInBlack;
+
+class Main {
+	  public static void main(String[] args) {
+	    AlienPack pack1 = new AlienPack(5);
+	    pack1.addAlien(new MarshmalloAlien(), 0);
+	    pack1.addAlien(new OgreAlien(), 1);
+	    pack1.addAlien(new OgreAlien(), 2);
+	    pack1.addAlien(new SnakeAlien(), 3);
+	    pack1.addAlien(new MarshmalloAlien(), 4);
+
+	    MenInBlack AgentK = new MenInBlack(pack1);
+	    AgentK.kill();
+	    System.out.println("Your score is " + AgentK.getScore());
+	  }
+	}
+
+
+//MarshmalloAlien
+
+package MenInBlack;
+
+public class MarshmalloAlien implements Alien
+{
+	private int score = 15;
+	public int getScore() {
+		return score;
+	}
+	
+}
+
+//MenInBlack
+package MenInBlack;
+
+public class MenInBlack {
+	int score;
+	AlienPack AP;
+	public MenInBlack(AlienPack aP) {
+		AP = aP;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	public AlienPack getAP() {
+		return AP;
+	}
+	public void setAP(AlienPack aP) {
+		AP = aP;
+	}
+	
+	public void kill() {
+		Alien arr[] = AP.getAliens();
+		int loop = arr.length;
+		for(int i = 0; i <loop; i++) {
+			this.score = this.score + arr[i].getScore();
+		}
+	}
+	
+}
+
+
+//MenInBlackLevel2
+package MenInBlack;
+
+import java.util.Random;
+
+public class MenInBlackLevel2 extends MenInBlack{
+
+	public MenInBlackLevel2(int score, AlienPack aP) {
+		super(aP);
+	}
+	
+	public void kill() {
+		Alien arr[] = AP.getAliens();
+		int loop = arr.length;
+		for(int i = 0; i <loop; i++) {
+			Random random = new Random(); 
+			this.score = this.score + arr[i].getScore();
+			if(random.nextInt() % 2 == 1 ) {
+				this.score = -this.score - 2;
+			}
+		}
+	}
+	
+}
+
+
+
+//OrgeAlien
+package MenInBlack;
+
+public class OgreAlien implements Alien{
+	private int score = 10;
+	public int getScore() {
+		return score;
+	}
+}
+
+
+//SnakeAlien
+package MenInBlack;
+
+public class SnakeAlien implements Alien{
+	private int score = 5;
+	public int getScore() {
+		return score;
+	}
+}
+
+
+
