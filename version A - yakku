@@ -1,0 +1,81 @@
+package versionA;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Lottery {
+	private int lotteryNumbers[] = new int[5];
+	private int userpick[] = new int[5];
+	private int matching[] = new int[5];
+	private int count = 0;
+	
+	Random rd = new Random();
+	
+	public Lottery() {
+		//create an array consist of 5 random intergers
+		for (int i = 0; i<5; i++) {
+			lotteryNumbers[i] = rd.nextInt(9);
+		}
+	}
+	
+	
+	public void function() {
+		Scanner sc = new Scanner(System.in);
+		
+		
+		for (int i = 0; i<5; i++) {
+			//getting user inputs and store in an array
+			System.out.print("Enter Number " + (i+1) +" : ");
+			userpick[i] = sc.nextInt();
+			
+			// compare values and count matching values 
+			if(userpick[i] ==  lotteryNumbers[i]) {
+				matching[count] = userpick[i];
+				count = count + 1;
+			}
+			
+		}
+		
+		//printing output;
+		System.out.println();
+		System.out.print("User's Numbers  : ");
+		for (int i = 0; i<5; i++){
+			System.out.print(userpick[i] + " ");
+		}
+		System.out.println();
+		
+		System.out.print("Lottery Numbers : ");
+		for (int i = 0; i<5; i++){
+			System.out.print(lotteryNumbers[i] + " ");
+		}
+		System.out.println();
+		
+		System.out.print("Number of matching digits : " + count);
+		System.out.println();
+		
+		System.out.print("Matching digits : ");
+		for (int i = 0; i<5; i++){
+			if(matching[i] != 0)
+			System.out.print(matching[i] + " ");
+		}
+		System.out.println();
+	}
+	
+}
+
+
+//----------------------------------------main--------------------------------------------
+
+
+package versionA;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Lottery lt = new Lottery();
+		
+		lt.function();
+
+	}
+
+}
