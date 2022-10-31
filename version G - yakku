@@ -1,0 +1,92 @@
+package versionG;
+
+import java.util.Scanner;
+
+public class Employee {
+	private String EmpId;
+	private String name;
+	private String address;
+	
+	public Employee(String empId, String name, String address) {
+		this.EmpId = empId;
+		this.name = name;
+		this.address = address;
+	}
+	
+	public void Read() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter EmpID   :");
+		this.EmpId = sc.next();
+		
+		System.out.println("Enter Name    :");
+		this.name = sc.next();
+		
+		System.out.println("Enter Address :");
+		this.address = sc.next();
+	}
+	
+	public void Print() {
+		System.out.println("EmpID   = " + this.EmpId);
+		System.out.println("Name    = " + this.name);
+		System.out.println("Address = " + this.address);
+	}
+	
+	
+	
+}
+
+
+------------------------------------manager-------------------------------------------------
+
+package versionG;
+
+import java.util.Scanner;
+
+public class Manager extends Employee{
+	
+	private String Department;
+	private int ProductNo1;
+	private int ProductNo2;
+	private int ProductNo3;
+
+	public Manager(String empId, String name, String address, String department, int productNo1, int productNo2,
+			int productNo3) {
+		super(empId, name, address);
+		Department = department;
+		ProductNo1 = productNo1;
+		ProductNo2 = productNo2;
+		ProductNo3 = productNo3;
+	}
+	
+	public void Read() {
+		super.Read();
+		
+		Scanner sc = new Scanner(System.in);
+		try {
+		System.out.println("Enter Department   :");
+		this.Department = sc.next();
+		
+		System.out.println("Enter ProductNo1   :");
+		this.ProductNo1 = sc.nextInt();
+		
+		System.out.println("Enter ProductNo2   :");
+		this.ProductNo2 = sc.nextInt();
+		
+		System.out.println("Enter ProductNo3   :");
+		this.ProductNo3 = sc.nextInt();
+		} catch (Exception e) {
+			System.out.println("Invalid Input");
+		}
+		sc.close();
+	}
+	
+	public void Print() {
+		super.Print();
+		System.out.println("Department   = " + this.Department);
+		System.out.println("Product no 1 = " + this.ProductNo1);
+		System.out.println("Product no 2 = " + this.ProductNo2);
+		System.out.println("Product no 3 = " + this.ProductNo3);
+	}
+}
+
+
